@@ -1,13 +1,18 @@
 {
   "name": "criclove",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "release-patch": "npm version patch --force --no-git-tag-version && git add package.json package-lock.json",
+    "release": "node release-manager.js",
+    "doc": "npx compodoc -p tsconfig.app.json && npx compodoc -s -r 9000",
+    "precommit": "npm run lint",
+    "commit": "npm run release-patch && npx git-cz"
   },
   "private": true,
   "dependencies": {
@@ -27,9 +32,11 @@
     "@angular-devkit/build-angular": "~0.1000.1",
     "@angular/cli": "~10.0.1",
     "@angular/compiler-cli": "~10.0.2",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "chalk": "^4.1.0",
+    "cli-select": "^1.1.2",
     "codelyzer": "^6.0.0-next.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
