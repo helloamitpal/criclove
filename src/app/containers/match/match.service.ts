@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-
-import { Match } from './match.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class MatchService {
 
-  private $$matches = new BehaviorSubject<Match[]>([]);
-  private baseUrl = 'https://56e05c3213da80110013eba3.mockapi.io/api';
-  private dataStore: { matches: Match[] } = { matches: [] };
-  readonly matches = this.$$matches.asObservable();
+  private $$matches = new BehaviorSubject<string>('');
+  private baseUrl = 'https://www.cricbuzz.com/api/html/homepage-scag';
+  private dataStore: { matches: string } = { matches: '' };
+  public readonly matches = this.$$matches.asObservable();
 
   constructor(private http: HttpClient) { }
 
   loadAllMatches(): void {
-    this.http.get<Match[]>(`${this.baseUrl}/todos`).subscribe(
+    this.http.get<string>(this.baseUrl).subscribe(
       (data) => {
         this.dataStore.matches = data;
-        this.$$matches.next(Object.assign({}, this.dataStore).matches);
+        this.$$matches.next(data);
       },
       (error) => console.log('Could not load matches.')
     );

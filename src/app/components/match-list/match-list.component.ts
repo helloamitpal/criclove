@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { MatchService } from '../../containers/match/match.service';
-import { Match } from '../../containers/match/match.model';
 
 @Component({
   selector: 'app-match-list',
@@ -11,7 +10,7 @@ import { Match } from '../../containers/match/match.model';
 })
 export class MatchListComponent implements OnInit {
 
-  matches: Observable<Match[]>;
+  matches: Observable<string>;
 
   constructor(private matchService: MatchService) {
   }
