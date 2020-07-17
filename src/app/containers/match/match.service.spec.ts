@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { MatchListService } from './match.service';
+import { MatchService } from './match.service';
 
 describe('Service: MatchList', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MatchListService]
+      providers: [MatchService]
     });
   });
 
-  it('should ...', inject([MatchListService], (service: MatchListService) => {
+  it('should ...', inject([MatchService], (service: MatchService) => {
     expect(service).toBeTruthy();
   }));
 });

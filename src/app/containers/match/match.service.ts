@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class MatchService {
@@ -13,12 +14,19 @@ export class MatchService {
   constructor(private http: HttpClient) { }
 
   loadAllMatches(): void {
-    this.http.get<string>(this.baseUrl).subscribe(
+    this.http.get<string>(this.baseUrl)
+    .pipe(
+      catchError((err) => {
+        console.log('error caught in service');
+        console.error(err);
+        return throwError(err);
+      })
+    )
+    .subscribe(
       (data) => {
         this.dataStore.matches = data;
         this.$$matches.next(data);
-      },
-      (error) => console.log('Could not load matches.')
+      }
     );
   }
 }
