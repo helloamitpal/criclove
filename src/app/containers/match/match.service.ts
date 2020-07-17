@@ -17,8 +17,7 @@ export class MatchService {
     this.http.get<string>(this.baseUrl)
     .pipe(
       catchError((err) => {
-        console.log('error caught in service');
-        console.error(err);
+        this.$$matches.next('<span>No matches found</span>');
         return throwError(err);
       })
     )

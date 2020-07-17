@@ -4,10 +4,11 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { RollbarService } from './error-reporter';
+import { SnackBarComponent } from '../components/snackbar/snackbar.component';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, private snackBar: SnackBarComponent) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
@@ -18,12 +19,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         if (error.error instanceof ErrorEvent) {
           // client-side error
-          errorMessage = `Error: ${error.error.message}`;
+          errorMessage = error.error.message;
         } else {
           // server-side error
-          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+          errorMessage = error.message;
         }
-        window.alert(errorMessage);
+
+        // showing error messages in notification
+        this.snackBar.openSnackBar(errorMessage);
         rollbar.error(error);
         return throwError(errorMessage);
       })

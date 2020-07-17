@@ -10,11 +10,13 @@ import { MatchModule } from '../containers/match/match.module';
 import { MatchListComponent } from '../components/match-list/match-list.component';
 import { HttpErrorInterceptor } from './global-http-Interceptor.service';
 import { rollbarFactory, RollbarService } from './error-reporter';
+import { SnackBarComponent } from '../components/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MatchListComponent
+    MatchListComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { rollbarFactory, RollbarService } from './error-reporter';
     MatchModule
   ],
   providers: [
+    SnackBarComponent,
     {
       provide: RollbarService,
       useFactory: rollbarFactory
