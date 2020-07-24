@@ -1,6 +1,6 @@
 {
   "name": "criclove",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "ng": "ng",
     "start": "concurrently \"npm run server\" \"npm run client\"",
