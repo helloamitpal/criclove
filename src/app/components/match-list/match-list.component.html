@@ -1,10 +1,12 @@
 <div class="match-list">
   <ul>
     <li
-      *ngFor="let match of matches | async as MatchModel"
+      *ngFor="let match of matches | async"
       (click)="matchDetails($event, match.url)"
       class="match"
-      [innerHTML]="match.content"
-    ></li>
+    >
+      <span class="live" *ngIf="match.live">live</span>
+      <div [innerHTML]="match.content"></div>
+    </li>
   </ul>
 </div>

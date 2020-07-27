@@ -11,16 +11,18 @@ app.use(morgan());
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 
+// creating JSON for matches
 const getParsedResponse = (html) => {
   const $ = cheerio.load(html);
   const matches = [];
-  const liveMatches = $('.cb-text-live');
+  const allMatches = $('a');
 
-  for (let index = 0, len = liveMatches.length; index < len; index++) {
-    const anchor = $(liveMatches[index]).parents('a');
+  for (let index = 0, len = allMatches.length; index < len; index++) {
+    const anchor = $(allMatches[index]);
 
     anchor.find('*').removeAttr('style', '');
     matches.push({
+      live: anchor.find('.cb-text-live').length > 0,
       url: anchor.attr('href'),
       content: anchor.html()
     });
@@ -29,6 +31,9 @@ const getParsedResponse = (html) => {
   return matches;
 };
 
+/**
+ * Live Match APIs
+ */
 app.get('/api/matches', function (req, res) {
   request('http://www.cricbuzz.com/api/html/homepage-scag', (err, resp, body) => {
     if (err) {

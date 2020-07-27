@@ -17,7 +17,21 @@
       margin: 1em;
       border-radius: 5px;
       background-color: #fff;
-      box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
+      box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
+      cursor: pointer;
+      position: relative;
+
+      .live {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 0.8em;
+        background-color: red;
+        color: #fff;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        padding: 0 5px;
+      }
 
       .cb-hmscg-tm-nm {
         font-weight: bold;
