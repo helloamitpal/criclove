@@ -1,1 +1,10 @@
-<div [innerHTML]="matches | async" class="match-list"></div>
+<div class="match-list">
+  <ul>
+    <li
+      *ngFor="let match of matches | async as MatchModel"
+      (click)="matchDetails($event, match.url)"
+      class="match"
+      [innerHTML]="match.content"
+    ></li>
+  </ul>
+</div>

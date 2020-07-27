@@ -1,23 +1,26 @@
 .match-list {
-  background-color: rgb(207, 242, 241);
-  padding: 1em;
-
-  .cb-cat-head-wrap {
-    display: none;
-  }
+  height: 100%;
+  background: linear-gradient(to bottom,  #9b5ffe 0%,#8072fb 100%);
 
   ul {
     padding: 0;
     margin: 0;
     display: flex;
     list-style-type: none;
+    flex-wrap: wrap;
 
-    li {
+    li.match {
       flex: 1;
+      min-width: 250px;
+      max-width: 250px;
+      padding: 1em;
+      margin: 1em;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
 
-      a {
-        text-decoration: none;
-        color: #333;
+      .cb-hmscg-tm-nm {
+        font-weight: bold;
       }
     }
   }

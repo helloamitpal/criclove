@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import * as $ from 'jquery';
+
+import { MatchModel } from './match.model';
 
 @Injectable()
 export class MatchService {
   private $$matchOberserver = new BehaviorSubject<any>('');
   private baseUrl = '/api/matches';
-  private dataStore: { matches: string } = { matches: '' };
+  private dataStore: { matches: MatchModel[] } = { matches: [] };
   public readonly matches = this.$$matchOberserver.asObservable();
 
   constructor(private http: HttpClient) {}
 
   loadAllMatches(): void {
     this.http
-      .get(this.baseUrl, { responseType: 'text' })
+      .get(this.baseUrl)
       .pipe(
         catchError((err) => {
           this.$$matchOberserver.next('<span>No matches found</span>');
@@ -23,8 +24,7 @@ export class MatchService {
         })
       )
       .subscribe((data) => {
-        $(data).append('<p>amit</p>');
-        this.dataStore.matches = data;
+        this.dataStore.matches = data as MatchModel[];
         this.$$matchOberserver.next(data);
       });
   }
