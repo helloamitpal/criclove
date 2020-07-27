@@ -4,12 +4,15 @@ const request = require('request');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cheerio = require('cheerio');
+const dotenv = require('dotenv');
 
+dotenv.config();
 const app = express();
 
 app.use(morgan());
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
+const { API_KEY } = process.env;
 
 // creating JSON for matches
 const getParsedResponse = (html) => {
@@ -41,6 +44,19 @@ app.get('/api/matches', function (req, res) {
     }
     const output = getParsedResponse(body);
     res.json(output);
+  });
+});
+
+/**
+ * Match news
+ */
+app.get('/api/news', function(req, res) {
+  request(`http://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=${API_KEY}`, (err, resp) => {
+    if (err) {
+      res.status(500).send({ error: 'Something went wrong' });
+    }
+
+    res.json(resp);
   });
 });
 

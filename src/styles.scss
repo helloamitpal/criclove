@@ -8,4 +8,13 @@ html, body {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to bottom,  #9b5ffe 0%,#8072fb 100%);
+}
+
+app-root {
+  max-width: 1024px;
+  margin: 0 auto;
+  background: white;
+  display: block;
+  height: 100%;
 }
