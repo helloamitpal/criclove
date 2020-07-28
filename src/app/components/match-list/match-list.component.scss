@@ -1,6 +1,5 @@
 .match-list {
   height: 100%;
-  background: linear-gradient(to bottom,  #9b5ffe 0%,#8072fb 100%);
 
   ul {
     padding: 0;
@@ -17,11 +16,11 @@
       padding: 1em;
       margin: 1em;
       border-radius: 5px;
-      background-color: #fff;
       box-shadow: 0 0 5px 1px rgba(0,0,0,0.4);
+      color: #fff;
       cursor: pointer;
       position: relative;
-      background: linear-gradient(45deg, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
+      background: linear-gradient(45deg, #5260a2 0%, #2C3666 100%);
 
       .live {
         position: absolute;
