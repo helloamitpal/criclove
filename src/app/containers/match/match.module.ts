@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { MatchComponent } from './match.component';
 import { MatchListComponent } from '../../components/match-list/match-list.component';
@@ -7,7 +8,8 @@ import { MatchRoutingModule } from './match-routing.module';
 
 @NgModule({
   imports: [
-    MatchRoutingModule
+    MatchRoutingModule,
+    CommonModule
   ],
   declarations: [
     MatchComponent,
