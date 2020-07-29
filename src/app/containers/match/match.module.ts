@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatchComponent } from './match.component';
+import { MatchDetailsComponent } from '../../components/match-details/match-details.component';
 import { MatchListComponent } from '../../components/match-list/match-list.component';
 import { MatchService } from './match.service';
 import { MatchRoutingModule } from './match-routing.module';
@@ -12,7 +12,7 @@ import { MatchRoutingModule } from './match-routing.module';
     CommonModule
   ],
   declarations: [
-    MatchComponent,
+    MatchDetailsComponent,
     MatchListComponent
   ],
   providers: [
