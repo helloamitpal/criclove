@@ -5,6 +5,7 @@ import { MatchDetailsComponent } from '../../components/match-details/match-deta
 import { MatchListComponent } from '../../components/match-list/match-list.component';
 import { MatchService } from './match.service';
 import { MatchRoutingModule } from './match-routing.module';
+import { SafePipe } from '../../filters/safe.pipe';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { MatchRoutingModule } from './match-routing.module';
   ],
   declarations: [
     MatchDetailsComponent,
-    MatchListComponent
+    MatchListComponent,
+    SafePipe
   ],
   providers: [
     MatchService

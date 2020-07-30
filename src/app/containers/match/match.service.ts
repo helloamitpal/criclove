@@ -8,9 +8,14 @@ import { MatchModel } from './match.model';
 @Injectable()
 export class MatchService {
   private $$matchOberserver = new BehaviorSubject<any>('');
+  private $$ErrorObserver = new BehaviorSubject<string>('');
   private baseUrl = '/api/matches';
+  // datastore property can be used internally in this service if multiple functions
+  // try to manipulate the same dataset
   private dataStore: { matches: MatchModel[] } = { matches: [] };
+
   public readonly matches = this.$$matchOberserver.asObservable();
+  public readonly error = this.$$ErrorObserver.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -19,13 +24,20 @@ export class MatchService {
       .get(this.baseUrl)
       .pipe(
         catchError((err) => {
-          this.$$matchOberserver.next('<span>No matches found</span>');
+          this.$$ErrorObserver.next('Something went wrong. Please wait for sometime.');
           return throwError(err);
         })
       )
       .subscribe((data) => {
-        this.dataStore.matches = data as MatchModel[];
-        this.$$matchOberserver.next(data);
+        const dataset = data as MatchModel[];
+
+        if (dataset.length === 0) {
+          this.dataStore.matches = [];
+          this.$$ErrorObserver.next('No matches found');
+        } else {
+          this.dataStore.matches = dataset;
+          this.$$matchOberserver.next(dataset);
+        }
       });
   }
 }

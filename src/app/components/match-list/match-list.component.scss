@@ -1,5 +1,21 @@
 .match-list {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .error-container {
+    margin: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+
+  iframe {
+    height: 350px;
+    width: calc(100% - 4em);
+    margin: 2em;
+    box-sizing: border-box;
+  }
 
   ul {
     padding: 0;

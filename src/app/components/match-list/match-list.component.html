@@ -1,5 +1,6 @@
 <div class="match-list">
-  <ul>
+  <p *ngIf="error" class="error-container">{{ error | async }}</p>
+  <ul *ngIfElse>
     <li
       *ngFor="let match of matches | async"
       (click)="matchDetails($event, match.url)"
@@ -9,4 +10,6 @@
       <div [innerHTML]="match.content"></div>
     </li>
   </ul>
+  <iframe [src]="videoPlaylist | safe"></iframe>
 </div>
+
