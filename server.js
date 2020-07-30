@@ -14,6 +14,22 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 const { API_KEY } = process.env;
 
+const getDate = (date) => {
+  if (!date) {
+    return null;
+  }
+
+  const datetime = new Date(date.split('|')[0]);
+  const ampm = datetime.getHours() >= 12 ? 'PM' : 'AM';
+  const weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saterday'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  const hour = ampm === 'AM' ? datetime.getHours() : datetime.getHours() - 12;
+  const month = months[datetime.getMonth()+1];
+  const week = weeks[datetime.getDay()];
+
+  return `${week}, ${datetime.getDate()} ${month}, ${hour}:${datetime.getMinutes()} ${ampm}`;
+};
+
 // creating JSON for matches
 const getParsedResponse = (html) => {
   const $ = cheerio.load(html);
@@ -24,10 +40,15 @@ const getParsedResponse = (html) => {
     const anchor = $(allMatches[index]);
 
     anchor.find('*').removeAttr('style', '');
+    const date = anchor.find('.cb-text-preview').attr('ng-bind');
+    const url = anchor.attr('href');
+
     matches.push({
       live: anchor.find('.cb-text-live').length > 0,
-      url: anchor.attr('href'),
-      content: anchor.html()
+      title: url.split('/').pop().split('-').join(' '),
+      url,
+      content: anchor.html(),
+      toBeStartedAt: getDate(date)
     });
   }
 
@@ -40,9 +61,12 @@ const getParsedResponse = (html) => {
 app.get('/api/matches', function (req, res) {
   request('http://www.cricbuzz.com/api/html/homepage-scag', (err, resp, body) => {
     if (err) {
+      console.log('Something went wrong: ', err);
       res.status(500).send({ error: 'Something went wrong' });
     }
     const output = getParsedResponse(body);
+
+    console.log('output generated');
     res.json(output);
   });
 });

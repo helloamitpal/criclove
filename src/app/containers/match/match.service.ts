@@ -7,8 +7,8 @@ import { MatchModel } from './match.model';
 
 @Injectable()
 export class MatchService {
-  private $$matchOberserver = new BehaviorSubject<any>('');
-  private $$ErrorObserver = new BehaviorSubject<string>('');
+  private $$matchOberserver = new BehaviorSubject<any>(null);
+  private $$ErrorObserver = new BehaviorSubject<string>(null);
   private baseUrl = '/api/matches';
   // datastore property can be used internally in this service if multiple functions
   // try to manipulate the same dataset

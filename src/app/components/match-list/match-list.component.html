@@ -1,13 +1,15 @@
 <div class="match-list">
-  <p *ngIf="error" class="error-container">{{ error | async }}</p>
-  <ul *ngIfElse>
+  <p class="error-container">{{ error | async }}</p>
+  <ul>
     <li
       *ngFor="let match of matches | async"
       (click)="matchDetails($event, match.url)"
       class="match"
     >
       <span class="live" *ngIf="match.live">live</span>
+      <div class="title">{{ match.title }}</div>
       <div [innerHTML]="match.content"></div>
+      <div *ngIf="match.toBeStartedAt">{{ match.toBeStartedAt }}</div>
     </li>
   </ul>
   <iframe [src]="videoPlaylist | safe"></iframe>
