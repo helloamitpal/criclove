@@ -84,6 +84,13 @@ app.get('/api/news', function(req, res) {
   });
 });
 
+/**
+ * API health check
+ */
+app.get('/_health', (req, res) => {
+  res.status(200).send('ok')
+})
+
 const server = http.createServer(app);
 
 // start web server

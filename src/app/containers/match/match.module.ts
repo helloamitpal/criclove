@@ -6,11 +6,13 @@ import { MatchListComponent } from '../../components/match-list/match-list.compo
 import { MatchService } from './match.service';
 import { MatchRoutingModule } from './match-routing.module';
 import { SafePipe } from '../../filters/safe.pipe';
+import { MaterialModule } from '../../root/material.module';
 
 @NgModule({
   imports: [
     MatchRoutingModule,
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
   declarations: [
     MatchDetailsComponent,
