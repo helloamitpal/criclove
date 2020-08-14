@@ -1,7 +1,10 @@
 {
   "/api": {
-    "target": "http://localhost:3000",
+    "target": "https://cricloveserver.herokuapp.com",
     "secure": false,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "router": {
+      "localhost:4200" : "http://localhost:5000"
+    }
   }
 }

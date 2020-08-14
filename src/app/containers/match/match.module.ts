@@ -7,6 +7,7 @@ import { MatchService } from './match.service';
 import { MatchRoutingModule } from './match-routing.module';
 import { SafePipe } from '../../filters/safe.pipe';
 import { MaterialModule } from '../../root/material.module';
+import { NewsComponent } from '../../components/news/news.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { MaterialModule } from '../../root/material.module';
   declarations: [
     MatchDetailsComponent,
     MatchListComponent,
+    NewsComponent,
     SafePipe
   ],
   providers: [
