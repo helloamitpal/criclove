@@ -5,12 +5,17 @@ import { retry, catchError } from 'rxjs/operators';
 
 import { RollbarService } from './error-reporter';
 import { SnackBarComponent } from '../components/snackbar/snackbar.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(private injector: Injector, private snackBar: SnackBarComponent) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    request = request.clone({
+      url: `${environment.API}${request.url}`
+    });
+
     return next.handle(request).pipe(
       retry(1),
       catchError((error: HttpErrorResponse) => {
