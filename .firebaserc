@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "criclove-share": {
+      "hosting": {
+        "criclove": [
+          "criclove-share"
+        ]
+      }
+    }
+  }
+}
